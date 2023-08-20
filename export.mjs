@@ -95,8 +95,8 @@ async function exportToExcel() {
   updateTranslationsExcel(
     mapObject,
     templatesData,
-    "template.xls",
-    "translations.xls"
+    path.join(process.cwd(), pluginConfig.inputFile),
+    path.join(process.cwd(), pluginConfig.outputFile)
   );
 }
 
