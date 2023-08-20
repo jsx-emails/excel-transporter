@@ -67,7 +67,7 @@ async function exportToExcel() {
   const emailTemplatesList = getEmailTemplatesList();
   const {
     templates: { templatesDir },
-    plugins: { "excel-translations": pluginConfig },
+    plugins: { "excel-transporter": pluginConfig },
   } = getConfig();
 
   /** @type {TemplateData[]} */
