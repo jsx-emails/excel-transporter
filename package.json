@@ -1,10 +1,10 @@
 {
   "name": "jsx-emails-excel-transporter",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A plugin for extracting translations from excel files and creating excel files from translations",
   "main": "index.js",
   "author": "Iman Mahmoudinasab",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "private": false,
   "scripts": {
     "test": "jest",
@@ -20,7 +20,7 @@
   "dependencies": {
     "change-case": "^4.1.2",
     "fs-extra": "^11.1.1",
-    "jsx-email-builder": "^0.24.0",
+    "jsx-email-builder": "^1.1.0",
     "minimist": "^1.2.8",
     "xlsx": "^0.18.5"
   }

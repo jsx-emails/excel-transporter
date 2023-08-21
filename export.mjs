@@ -6,27 +6,34 @@ import { getHeaders, addNewRow } from "./utils/excel.mjs";
 import { getShortCodes } from "./utils/shortcodes.mjs";
 
 /**
- * @typedef {{sheet: string, keyColumn:string, cellData:{headerKey: string, value: string}[]}} MapObject
+ * @typedef {{sheet: string, cellData:{headerKey: string, value: string}[]}} ExportMap
  * @typedef {{templatePath: string, texts: string[], subject: string}} TemplateData
- * @param {MapObject} mapObject
+ * @param {ExportMap} exportMap
  * @param {TemplateData[]} templatesData
  * @param {string} inputFileName
  * @returns {void}
  */
 function updateTranslationsExcel(
-  mapObject,
+  exportMap,
   templatesData,
   inputFileName,
   outputFileName
 ) {
   let wb = XLSX.readFile(inputFileName);
 
-  let sheet = wb.Sheets[mapObject.sheet];
+  let sheet = wb.Sheets[exportMap.sheet];
+  if (!sheet) {
+    console.error(
+      `Sheet "${exportMap.sheet}" not found\n` +
+        `Available sheets: ${Object.keys(wb.Sheets).join(", ")}`
+    );
+    process.exit(1);
+  }
   for (let templateData of templatesData) {
     for (let text of templateData.texts) {
       const headers = getHeaders(sheet);
       const row = {};
-      for (let rowMap of mapObject.cellData) {
+      for (let rowMap of exportMap.cellData) {
         let column = headers[rowMap.headerKey].columnName;
         // update cell:
         const value = rowMap.value.replace(/%(.+?)%/g, (_match, p1) => {
@@ -90,13 +97,13 @@ async function exportToExcel() {
     });
   }
 
-  /** @type {MapObject} */
-  const mapObject = pluginConfig.mapper;
+  /** @type {ExportMap} */
+  const exportMap = pluginConfig.export.exportMap;
   updateTranslationsExcel(
-    mapObject,
+    exportMap,
     templatesData,
-    path.join(process.cwd(), pluginConfig.inputFile),
-    path.join(process.cwd(), pluginConfig.outputFile)
+    path.join(process.cwd(), pluginConfig.export.inputFile),
+    path.join(process.cwd(), pluginConfig.export.outputFile)
   );
 }
 

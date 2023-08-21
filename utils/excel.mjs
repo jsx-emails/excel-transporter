@@ -2,7 +2,7 @@ import XLSX from "xlsx";
 
 export function getHeaders(sheet) {
   let range = XLSX.utils.decode_range(sheet["!ref"]);
-  let headerRow = [];
+  let headerRow = {};
   for (let C = range.s.c; C <= range.e.c; ++C) {
     let address = XLSX.utils.encode_col(C) + XLSX.utils.encode_row(range.s.r);
     let cell = sheet[address];
@@ -21,7 +21,7 @@ export function addNewRow(sheet, row, fillWithPreviousRow = false) {
   let range = XLSX.utils.decode_range(sheet["!ref"]);
   const isNewRowFirstDataRow = range.e.r === 1;
   const isFirstRowAlreadyFilled = Boolean(
-    sheet[Object.keys(row)[0] + XLSX.utils.encode_row(1)]?.v,
+    sheet[Object.keys(row)[0] + XLSX.utils.encode_row(1)]?.v
   );
 
   let newRowIdx =

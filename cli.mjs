@@ -4,6 +4,7 @@ import fs from "fs-extra";
 import path from "path";
 import parseArgs from "minimist";
 import exportToExcel from "./export.mjs";
+import importFromExcel from "./import.mjs";
 
 const logger = console;
 
@@ -37,8 +38,7 @@ async function main() {
       await exportToExcel();
       break;
     case "import":
-      // todo: implement
-      // importFromExcel();
+      importFromExcel();
       break;
     case undefined:
       logger.error("[Excel Transporter] error: No command specified");
