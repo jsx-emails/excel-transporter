@@ -1,6 +1,6 @@
 {
   "name": "jsx-emails-excel-transporter",
-  "version": "1.1.0",
+  "version": "1.4.1",
   "description": "A plugin for extracting translations from excel files and creating excel files from translations",
   "main": "index.js",
   "author": "Iman Mahmoudinasab",
@@ -17,10 +17,12 @@
     "@babel/preset-env": "^7.22.10",
     "jest": "^29.6.2"
   },
+  "peerDependencies": {
+    "jsx-email-builder": ">=1.6.0 <2.0.0"
+  },
   "dependencies": {
     "change-case": "^4.1.2",
     "fs-extra": "^11.1.1",
-    "jsx-email-builder": "^1.1.0",
     "minimist": "^1.2.8",
     "xlsx": "^0.18.5"
   }
